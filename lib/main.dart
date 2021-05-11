@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 
 import 'screens/pokedex.dart';
 
-void main() {
+Future<void> main() async {
+  await initHiveForFlutter();
   runApp(MyApp());
 }
 
