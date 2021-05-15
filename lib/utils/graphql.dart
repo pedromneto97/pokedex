@@ -4,12 +4,19 @@ class GraphQl {
   GraphQl._();
 
   final GraphQLClient client = GraphQLClient(
-    link: HttpLink('https://beta.pokeapi.co/graphql/v1beta', defaultHeaders: {
-      "X-Method-Used": "graphiql",
-    }),
-    // The default store is the InMemoryStore, which does NOT persist to disk
+    link: HttpLink(
+      'https://beta.pokeapi.co/graphql/v1beta',
+      defaultHeaders: const {
+        "X-Method-Used": "graphiql",
+      },
+    ),
     cache: GraphQLCache(
       store: HiveStore(),
+    ),
+    defaultPolicies: DefaultPolicies(
+      query: Policies(
+        fetch: FetchPolicy.cacheFirst,
+      ),
     ),
   );
 
