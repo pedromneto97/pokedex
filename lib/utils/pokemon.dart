@@ -3,65 +3,73 @@ import 'package:flutter/material.dart';
 import '../models/Pokemon.dart';
 import '../models/PokemonColor.dart';
 
-Map<String, dynamic> mapPokemon(data) {
+List<PokemonColor> mapColors(List<dynamic> value) {
   final List<PokemonColor> colors = [];
-  final List<Pokemon> pokemons = [];
-  late final int count;
+  value.forEach((element) {
+    colors.add(
+      PokemonColor(
+        name: element['name'],
+        pokemonNames: (element['pokemons'] as List<dynamic>)
+            .map((e) => e['name'] as String)
+            .toList(),
+      ),
+    );
+  });
+  return colors;
+}
 
-  data.forEach((key, value) {
-    if (key == 'colors') {
-      (value as List<dynamic>).forEach((element) {
-        colors.add(
-          PokemonColor(
-            name: element['name'],
-            pokemonNames: (element['pokemons'] as List<dynamic>)
-                .map((e) => e['name'] as String)
-                .toList(),
-          ),
-        );
-      });
-      return;
-    }
-    if (key == 'pokemons_data') {
-      count = value['info']['count'];
-      return;
-    }
-    if (key == 'pokemons') {
-      (value as List<dynamic>).forEach((element) {
-        final name = element['name'];
-        final abilities = (element['abilities'] as List<dynamic>)
-            .map(
-              (e) => e['ability']['name'] as String,
-            )
-            .toList();
-        final types = (element['types'] as List<dynamic>)
-            .map(
-              (e) => e['type']['name'] as String,
-            )
-            .toList();
-        final color = colors
-            .firstWhere(
-              (element) => element.pokemonNames.contains(name),
-            )
-            .name;
-        pokemons.add(
-          Pokemon(
-            name: name,
-            abilities: abilities,
-            baseExperience: element['base_experience'],
-            height: element['height'],
-            weight: element['weight'],
-            image:
-                'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${element['id']}.png',
-            types: types,
-            color: color,
-          ),
-        );
-      });
-    }
+Map<String, dynamic> mapPokemon(Map<String, dynamic> data) {
+  late final List<PokemonColor> colors;
+  final List<Pokemon> pokemons = [];
+  int? count;
+
+  if (data['colors'] is List<PokemonColor>) {
+    colors = data['colors'];
+  } else {
+    colors = mapColors(data['colors']);
+  }
+
+  if (data.containsKey('pokemons_data')) {
+    count = data['pokemons_data']['info']['count'];
+  }
+
+  (data['pokemons'] as List<dynamic>).forEach((element) {
+    final name = element['name'];
+    final abilities = (element['abilities'] as List<dynamic>)
+        .map(
+          (e) => e['ability']['name'] as String,
+        )
+        .toList();
+    final types = (element['types'] as List<dynamic>)
+        .map(
+          (e) => e['type']['name'] as String,
+        )
+        .toList();
+    final color = colors
+        .firstWhere(
+          (element) => element.pokemonNames.contains(name),
+        )
+        .name;
+    pokemons.add(
+      Pokemon(
+        name: name,
+        abilities: abilities,
+        baseExperience: element['base_experience'],
+        height: element['height'],
+        weight: element['weight'],
+        image:
+            'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${element['id']}.png',
+        types: types,
+        color: color,
+      ),
+    );
   });
 
-  return {'pokemons': pokemons, 'colors': colors, 'count': count};
+  return {
+    'pokemons': pokemons,
+    'colors': colors,
+    'count': count,
+  };
 }
 
 const PokemonColors = {
