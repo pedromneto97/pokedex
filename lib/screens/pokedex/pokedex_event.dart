@@ -8,3 +8,10 @@ abstract class PokedexEvent {
 class PokedexEventGet extends PokedexEvent {
   const PokedexEventGet();
 }
+
+class PokedexEventGetNextPage extends PokedexEvent {
+  final page;
+  const PokedexEventGetNextPage({
+    required this.page,
+  });
+}
