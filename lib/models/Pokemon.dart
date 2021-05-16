@@ -1,3 +1,6 @@
+import 'PokemonColor.dart';
+import 'PokemonStat.dart';
+
 class Pokemon {
   final String name;
   final List<String> abilities;
@@ -6,9 +9,10 @@ class Pokemon {
   final String image;
   final List<String> types;
   final int weight;
-  final String color;
+  final PokemonColor color;
+  final List<Stat> stats;
 
-  Pokemon({
+  const Pokemon({
     required this.name,
     required this.abilities,
     required this.baseExperience,
@@ -17,5 +21,6 @@ class Pokemon {
     required this.image,
     required this.types,
     required this.color,
+    required this.stats,
   });
 }
