@@ -19,7 +19,7 @@ class PokemonType extends StatelessWidget {
       ),
       padding: EdgeInsets.symmetric(
         vertical: 4,
-        horizontal: 16,
+        horizontal: 8,
       ),
       child: Text(
         pokemonType,
