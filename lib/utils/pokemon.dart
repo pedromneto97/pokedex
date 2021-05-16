@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-
 import '../models/Pokemon.dart';
 import '../models/PokemonColor.dart';
+import '../models/PokemonStat.dart';
 
 List<PokemonColor> mapColors(List<dynamic> value) {
   final List<PokemonColor> colors = [];
@@ -45,11 +44,27 @@ Map<String, dynamic> mapPokemon(Map<String, dynamic> data) {
           (e) => (e['type']['name'] as String).capitalize(),
         )
         .toList();
-    final String color = colors
-        .firstWhere(
-          (element) => element.pokemonNames.contains(name),
+    final PokemonColor color = colors.firstWhere(
+      (element) => element.pokemonNames.contains(name),
+    );
+
+    const PokemonStatName = {
+      'hp': 'HP',
+      'attack': 'ATK',
+      'defense': 'DEF',
+      'special-attack': 'SATK',
+      'special-defense': 'SDEF',
+      'speed': 'SPD',
+    };
+
+    final List<Stat> stats = (element['stats'] as List<dynamic>)
+        .map(
+          (e) => Stat(
+            name: PokemonStatName[e['stat']['name']] as String,
+            value: e['base_stat'],
+          ),
         )
-        .name;
+        .toList();
     pokemons.add(
       Pokemon(
         name: name.capitalize(),
@@ -61,6 +76,7 @@ Map<String, dynamic> mapPokemon(Map<String, dynamic> data) {
             'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${element['id']}.png',
         types: types,
         color: color,
+        stats: stats,
       ),
     );
   });
@@ -71,32 +87,6 @@ Map<String, dynamic> mapPokemon(Map<String, dynamic> data) {
     'count': count,
   };
 }
-
-const PokemonColors = {
-  'black': Colors.black,
-  'blue': Colors.blue,
-  'brown': Colors.brown,
-  'gray': Colors.grey,
-  'green': Colors.green,
-  'pink': Colors.pink,
-  'purple': Colors.purple,
-  'red': Colors.red,
-  'white': Colors.white,
-  'yellow': Colors.amber,
-};
-
-final pokemonColorsSecondary = {
-  'black': Colors.black12,
-  'blue': Colors.blue[300],
-  'brown': Colors.brown[300],
-  'gray': Colors.grey[300],
-  'green': Colors.green[300],
-  'pink': Colors.pink[300],
-  'purple': Colors.purple[300],
-  'red': Colors.red[300],
-  'white': Colors.white38,
-  'yellow': Colors.amber[400],
-};
 
 extension StringExtension on String {
   String capitalize() {
