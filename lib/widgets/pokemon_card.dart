@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../models/Pokemon.dart';
 import '../screens/pokemon/pokemon.dart';
-import '../utils/pokemon.dart';
 import 'pokemon_type.dart';
 
 class PokemonCard extends StatelessWidget {
@@ -13,7 +12,7 @@ class PokemonCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: PokemonColors[pokemon.color],
+      color: pokemon.color.primaryColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
@@ -64,8 +63,7 @@ class PokemonCard extends StatelessWidget {
                               tag: Key("${pokemon.name}-${e.value}"),
                               child: PokemonType(
                                 pokemonType: e.value,
-                                color: pokemonColorsSecondary[pokemon.color]
-                                    as Color,
+                                color: pokemon.color.secondaryColor,
                               ),
                             ),
                           );
@@ -75,8 +73,7 @@ class PokemonCard extends StatelessWidget {
                           child: PokemonType(
                             key: ObjectKey(e),
                             pokemonType: e.value,
-                            color:
-                                pokemonColorsSecondary[pokemon.color] as Color,
+                            color: pokemon.color.secondaryColor,
                           ),
                         );
                       }).toList(),
