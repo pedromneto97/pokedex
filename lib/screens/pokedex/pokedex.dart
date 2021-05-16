@@ -5,6 +5,8 @@ import '../../widgets/pokemon_card.dart';
 import 'bloc/pokedex_bloc.dart';
 
 class Pokedex extends StatelessWidget {
+  static const screenName = '/';
+
   const Pokedex();
 
   @override
