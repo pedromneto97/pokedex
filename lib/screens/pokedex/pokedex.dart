@@ -13,12 +13,19 @@ class Pokedex extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0x80fafafa),
-        centerTitle: true,
+        backgroundColor: Colors.white,
+        elevation: 0,
         title: Text(
-          "Pokemon",
+          "Pokedex",
+          style: TextStyle(
+            color: Colors.black87,
+            fontWeight: FontWeight.w900,
+            fontSize: 24,
+            height: 1.25,
+          ),
         ),
       ),
+      backgroundColor: Colors.white,
       body: BlocProvider(
         create: (context) => PokedexBloc(),
         lazy: false,
