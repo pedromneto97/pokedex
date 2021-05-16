@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Pokedex',
       initialRoute: Pokedex.screenName,
       routes: {
         Pokedex.screenName: (context) => const Pokedex(),
