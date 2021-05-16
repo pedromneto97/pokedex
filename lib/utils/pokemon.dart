@@ -34,25 +34,25 @@ Map<String, dynamic> mapPokemon(Map<String, dynamic> data) {
   }
 
   (data['pokemons'] as List<dynamic>).forEach((element) {
-    final name = element['name'];
-    final abilities = (element['abilities'] as List<dynamic>)
+    final String name = element['name'];
+    final List<String> abilities = (element['abilities'] as List<dynamic>)
         .map(
-          (e) => e['ability']['name'] as String,
+          (e) => (e['ability']['name'] as String).capitalize(),
         )
         .toList();
-    final types = (element['types'] as List<dynamic>)
+    final List<String> types = (element['types'] as List<dynamic>)
         .map(
-          (e) => e['type']['name'] as String,
+          (e) => (e['type']['name'] as String).capitalize(),
         )
         .toList();
-    final color = colors
+    final String color = colors
         .firstWhere(
           (element) => element.pokemonNames.contains(name),
         )
         .name;
     pokemons.add(
       Pokemon(
-        name: name,
+        name: name.capitalize(),
         abilities: abilities,
         baseExperience: element['base_experience'],
         height: element['height'],
