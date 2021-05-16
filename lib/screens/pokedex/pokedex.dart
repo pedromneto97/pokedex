@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../widgets/pokemon_card.dart';
-import 'pokedex/pokedex_bloc.dart';
+import '../../widgets/pokemon_card.dart';
+import 'bloc/pokedex_bloc.dart';
 
 class Pokedex extends StatelessWidget {
+  const Pokedex();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +38,9 @@ class Pokedex extends StatelessWidget {
             child: BlocBuilder<PokedexBloc, PokedexState>(
               builder: (context, state) {
                 if (state is InitialPokedexState) {
-                  BlocProvider.of<PokedexBloc>(context).add(PokedexEventGet());
+                  BlocProvider.of<PokedexBloc>(context).add(
+                    const PokedexEventGet(),
+                  );
                 }
                 if (state is PokedexStateSuccess) {
                   return CustomScrollView(
@@ -62,8 +66,8 @@ class Pokedex extends StatelessWidget {
                         ),
                       ),
                       if (state.isLoadingMore)
-                        SliverToBoxAdapter(
-                          child: const Padding(
+                        const SliverToBoxAdapter(
+                          child: Padding(
                             padding: EdgeInsets.symmetric(
                               vertical: 16,
                             ),

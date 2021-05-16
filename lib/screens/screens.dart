@@ -1,0 +1,1 @@
+export './pokedex/pokedex.dart';

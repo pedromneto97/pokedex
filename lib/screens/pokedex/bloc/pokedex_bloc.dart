@@ -4,10 +4,10 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
-import '../../models/Pokemon.dart';
-import '../../models/PokemonColor.dart';
-import '../../repositories/pokemon_repository.dart';
-import '../../utils/pokemon.dart';
+import '../../../models/Pokemon.dart';
+import '../../../models/PokemonColor.dart';
+import '../../../repositories/pokemon_repository.dart';
+import '../../../utils/pokemon.dart';
 
 part 'pokedex_event.dart';
 part 'pokedex_state.dart';
