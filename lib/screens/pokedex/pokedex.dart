@@ -46,10 +46,13 @@ class Pokedex extends StatelessWidget {
                 }
                 if (state is PokedexStateSuccess) {
                   return CustomScrollView(
+                    key: const Key("CustomScrollView"),
                     slivers: [
                       SliverPadding(
+                        key: const Key("SliverPadding"),
                         padding: const EdgeInsets.all(8),
                         sliver: SliverGrid(
+                          key: const Key("SliverGrid"),
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
@@ -60,9 +63,11 @@ class Pokedex extends StatelessWidget {
                           delegate: SliverChildBuilderDelegate(
                             (BuildContext context, int index) {
                               return PokemonCard(
+                                key: ObjectKey(state.pokemons[index]),
                                 pokemon: state.pokemons[index],
                               );
                             },
+                            addAutomaticKeepAlives: true,
                             childCount: state.pokemons.length,
                           ),
                         ),
