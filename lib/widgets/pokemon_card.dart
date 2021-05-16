@@ -17,8 +17,8 @@ class PokemonCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
-      elevation: 2.0,
-      clipBehavior: Clip.antiAlias,
+      elevation: 4.0,
+      clipBehavior: Clip.hardEdge,
       child: InkWell(
         onTap: () {
           Navigator.of(context).push(
@@ -85,7 +85,12 @@ class PokemonCard extends StatelessWidget {
                   Flexible(
                     child: Hero(
                       tag: Key("${pokemon.name}-Image"),
-                      child: Image.network(pokemon.image),
+                      child: Image.network(
+                        pokemon.image,
+                        key: ObjectKey(pokemon.image),
+                        cacheHeight: 168,
+                        cacheWidth: 168,
+                      ),
                     ),
                   ),
                 ],
