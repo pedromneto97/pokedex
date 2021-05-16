@@ -62,6 +62,12 @@ class PokemonRepository {
                     name
                   }
                 }
+                stats: pokemon_v2_pokemonstats {
+                  base_stat
+                  stat: pokemon_v2_stat {
+                    name
+                  }
+                }
                 weight
               }
               $countQuery
