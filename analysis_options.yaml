@@ -1,0 +1,12 @@
+include: package:effective_dart/analysis_options.yaml
+
+analyzer:
+  exclude: [ build/** ]
+
+linter:
+  rules:
+    prefer_single_quotes: true
+    use_named_constants: true
+    prefer_const_declarations: true
+    prefer_const_constructors: true
+    public_member_api_docs: false
