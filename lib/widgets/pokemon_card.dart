@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex/utils/pokemon.dart';
 
 import '../models/Pokemon.dart';
 import '../screens/pokemon/pokemon.dart';
-import 'pokemon_type.dart';
 
 class PokemonCard extends StatelessWidget {
   final Pokemon pokemon;
@@ -11,91 +11,71 @@ class PokemonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = getColorFromType(pokemon.types.first);
     return Card(
-      color: pokemon.color.primaryColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
+        side: BorderSide(
+          color: color,
+        ),
       ),
       elevation: 4.0,
       clipBehavior: Clip.hardEdge,
       child: InkWell(
-        onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => PokemonScreen(
-                pokemon: pokemon,
-              ),
-            ),
-          );
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: Hero(
-                  tag: Key("${pokemon.name}-Name"),
-                  child: Text(
-                    pokemon.name,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => PokemonScreen(
+                  pokemon: pokemon,
                 ),
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: pokemon.types.asMap().entries.map<Widget>((e) {
-                        if (e.key == 0) {
-                          return Padding(
-                            key: ObjectKey(e),
-                            padding: const EdgeInsets.only(bottom: 8.0),
-                            child: Hero(
-                              tag: Key("${pokemon.name}-${e.value}"),
-                              child: PokemonType(
-                                pokemonType: e.value,
-                                color: pokemon.color.secondaryColor,
-                              ),
-                            ),
-                          );
-                        }
-                        return Hero(
-                          tag: Key("${pokemon.name}-${e.value}"),
-                          child: PokemonType(
-                            key: ObjectKey(e),
-                            pokemonType: e.value,
-                            color: pokemon.color.secondaryColor,
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                  Flexible(
-                    child: Hero(
-                      tag: Key("${pokemon.name}-Image"),
-                      child: Image.network(
-                        pokemon.image,
-                        key: ObjectKey(pokemon.image),
-                        cacheHeight: 168,
-                        cacheWidth: 168,
+            );
+          },
+          child: Container(
+            height: 112,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 4.0, right: 8.0),
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      '#${pokemon.id.toString().padLeft(3, '0')}',
+                      style: TextStyle(
+                        fontSize: 8,
+                        height: 1.5,
+                        color: color,
                       ),
                     ),
                   ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
+                ),
+                Expanded(
+                  child: Hero(
+                    tag: Key("${pokemon.name}-Image"),
+                    child: Image.network(
+                      pokemon.image,
+                      height: 72,
+                      width: 72,
+                    ),
+                  ),
+                ),
+                Container(
+                  color: color,
+                  padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                  child: Text(
+                    pokemon.name,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 10,
+                      height: 1.6,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )),
     );
   }
 }
