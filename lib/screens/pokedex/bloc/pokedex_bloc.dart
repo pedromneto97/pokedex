@@ -4,8 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
-import '../../../models/Pokemon.dart';
-import '../../../models/PokemonColor.dart';
+import '../../../models/pokemon.dart';
 import '../../../repositories/pokemon_repository.dart';
 import '../../../utils/pokemon.dart';
 
@@ -22,7 +21,6 @@ class PokedexBloc extends Bloc<PokedexEvent, PokedexState> {
     if (event is PokedexEventGet) {
       final data = await _pokemonRepository.getPokemons(
         page: 1,
-        withColors: true,
         withCount: true,
       );
 
@@ -31,20 +29,18 @@ class PokedexBloc extends Bloc<PokedexEvent, PokedexState> {
       yield PokedexStateSuccess(
         pokemons: result['pokemons'],
         totalPages: (result['count'] / _pokemonRepository.pageSize).ceil(),
-        colors: result['colors'],
       );
     }
     if (event is PokedexEventGetNextPage) {
-      yield (state as PokedexStateSuccess).mergeWith(loadingMore: true);
+      yield (state as PokedexStateSuccess).mergeWith(isLoadingMore: true);
 
       final data = await _pokemonRepository.getPokemons(page: event.page);
-      data['colors'] = (state as PokedexStateSuccess).colors;
 
       final result = await compute(mapPokemon, data);
 
       yield (state as PokedexStateSuccess).mergeWith(
         pokemons: result['pokemons'],
-        loadingMore: false,
+        isLoadingMore: false,
         page: event.page,
       );
     }
