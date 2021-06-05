@@ -1,5 +1,8 @@
-import 'PokemonStat.dart';
+import 'package:flutter/material.dart';
 
+import 'pokemon_stat.dart';
+
+@immutable
 class Pokemon {
   final int id;
   final String name;
@@ -22,4 +25,6 @@ class Pokemon {
     required this.types,
     required this.stats,
   });
+
+  String get idHash => '#${id.toString().padLeft(3, '0')}';
 }
