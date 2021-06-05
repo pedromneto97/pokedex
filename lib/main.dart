@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:pokedex/design_system/design_system.dart';
 
+import 'design_system/design_system.dart';
 import 'screens/screens.dart';
 
 Future<void> main() async {
