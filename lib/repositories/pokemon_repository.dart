@@ -14,61 +14,35 @@ class PokemonRepository {
 
   final GraphQLClient client = GraphQl().client;
 
-  Future<Map<String, dynamic>> getPokemons(
-      {required int page,
-      bool withColors = false,
-      bool withCount = false}) async {
-    String colorsQuery = "";
-    String countQuery = "";
+  Future<Map<String, dynamic>> getPokemons({
+    required int page,
+    bool withCount = false,
+  }) async {
+    var countQuery = '';
 
-    if (withColors) {
-      colorsQuery = r"""
-        colors: pokemon_v2_pokemoncolor {
-          name
-          pokemons: pokemon_v2_pokemonspecies {
-            name
-          }
-          }
-      """;
-    }
     if (withCount) {
-      countQuery = """
+      countQuery = '''
          pokemons_data: pokemon_v2_pokemon_aggregate {
             info: aggregate {
               count
             }
          }
-      """;
+      ''';
     }
 
     final data = await client
         .query(
       QueryOptions(
         document: gql('''
-            query samplePokeAPIquery(\$page: Int!, \$pageSize: Int!) {
-              $colorsQuery
+            query QueryPokemons(\$page: Int!, \$pageSize: Int!) {
               pokemons: pokemon_v2_pokemon(limit: \$pageSize, offset: \$page) {
                 id
                 name
-                height
-                base_experience
                 types: pokemon_v2_pokemontypes {
                   type: pokemon_v2_type {
                     name
                   }
                 }
-                abilities: pokemon_v2_pokemonabilities {
-                  ability: pokemon_v2_ability {
-                    name
-                  }
-                }
-                stats: pokemon_v2_pokemonstats {
-                  base_stat
-                  stat: pokemon_v2_stat {
-                    name
-                  }
-                }
-                weight
               }
               $countQuery
           }
