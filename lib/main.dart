@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:pokedex/design_system/design_system.dart';
 
 import 'screens/screens.dart';
 
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Pokedex',
       initialRoute: Pokedex.screenName,
+      theme: theme,
       routes: {
         Pokedex.screenName: (context) => const Pokedex(),
       },
