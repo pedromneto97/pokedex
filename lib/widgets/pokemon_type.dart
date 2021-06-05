@@ -1,33 +1,36 @@
 import 'package:flutter/material.dart';
 
+import '../utils/pokemon.dart';
+
 class PokemonType extends StatelessWidget {
   final String pokemonType;
-  final Color color;
 
   const PokemonType({
     Key? key,
     required this.pokemonType,
-    required this.color,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final color = getColorFromType(pokemonType);
     return Container(
       decoration: BoxDecoration(
-        color: this.color,
-        borderRadius: BorderRadius.circular(16),
+        color: color,
+        borderRadius: BorderRadius.circular(10),
       ),
-      padding: EdgeInsets.symmetric(
-        vertical: 4,
+      padding: const EdgeInsets.symmetric(
+        vertical: 2,
         horizontal: 8,
       ),
       child: Text(
         pokemonType,
-        style: TextStyle(
-          color: this.color == Colors.white ? Colors.black : Colors.white,
-          fontSize: 12,
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 10,
+          height: 1.6,
+          fontWeight: FontWeight.bold,
         ),
-        textAlign: TextAlign.start,
+        textAlign: TextAlign.center,
       ),
     );
   }
