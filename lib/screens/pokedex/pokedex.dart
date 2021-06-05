@@ -62,10 +62,10 @@ class Pokedex extends StatelessWidget {
                           key: const Key("SliverGrid"),
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
+                            crossAxisCount: 3,
                             crossAxisSpacing: 4,
                             mainAxisSpacing: 4,
-                            childAspectRatio: 1.25,
+                            childAspectRatio: 0.928571429,
                           ),
                           delegate: SliverChildBuilderDelegate(
                             (BuildContext context, int index) {
