@@ -229,7 +229,7 @@ class PokemonScreen extends StatelessWidget {
                       right: 0,
                       child: Center(
                         child: Hero(
-                          tag: Key("${state.pokemon.name}-Image"),
+                          tag: Key('${state.pokemon.name}-Image'),
                           child: Image.network(
                             state.pokemon.image,
                             width: 200,

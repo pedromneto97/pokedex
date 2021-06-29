@@ -17,7 +17,7 @@ class Pokedex extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         title: const Text(
-          "Pokedex",
+          'Pokedex',
           style: TextStyle(
             color: Colors.black87,
             fontWeight: FontWeight.w900,
@@ -56,13 +56,13 @@ class Pokedex extends StatelessWidget {
                 }
                 if (state is PokedexStateSuccess) {
                   return CustomScrollView(
-                    key: const Key("CustomScrollView"),
+                    key: const Key('CustomScrollView'),
                     slivers: [
                       SliverPadding(
-                        key: const Key("SliverPadding"),
+                        key: const Key('SliverPadding'),
                         padding: const EdgeInsets.all(8),
                         sliver: SliverGrid(
-                          key: const Key("SliverGrid"),
+                          key: const Key('SliverGrid'),
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,

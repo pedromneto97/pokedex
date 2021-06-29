@@ -66,7 +66,7 @@ class PokemonCard extends StatelessWidget {
               ),
               Expanded(
                 child: Hero(
-                  tag: Key("${pokemon.name}-Image"),
+                  tag: Key('${pokemon.name}-Image'),
                   child: Image.network(
                     pokemon.image,
                     height: 72,

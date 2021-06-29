@@ -7,7 +7,7 @@ class GraphQl {
     link: HttpLink(
       'https://beta.pokeapi.co/graphql/v1beta',
       defaultHeaders: const {
-        "X-Method-Used": "graphiql",
+        'X-Method-Used': 'graphiql',
       },
     ),
     cache: GraphQLCache(
