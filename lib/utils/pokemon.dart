@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 import '../models/pokemon.dart';
+import '../models/pokemon_stat.dart';
 
 Map<String, dynamic> mapPokemon(Map<String, dynamic> data) {
   final pokemons = <Pokemon>[];
@@ -16,7 +17,7 @@ Map<String, dynamic> mapPokemon(Map<String, dynamic> data) {
         .map(
           (e) => (e['type']['name'] as String).capitalize(),
         )
-        .toList();
+        .toList(growable: false);
 
     pokemons.add(
       Pokemon(
@@ -33,6 +34,37 @@ Map<String, dynamic> mapPokemon(Map<String, dynamic> data) {
     'pokemons': pokemons,
     'count': count,
   };
+}
+
+DetailedPokemon mapPokemonToDetailedPokemon(Map<String, dynamic> data) {
+  final pokemon = data['pokemon'] as Pokemon;
+  final pokemonDetails = data['details'] as Map<String, dynamic>;
+
+  final abilities = (pokemonDetails['abilities'] as List<dynamic>)
+      .map((ability) => (ability['ability']['name'] as String).capitalize())
+      .take(2)
+      .toList(growable: false);
+
+  final stats = (pokemonDetails['stats'] as List<dynamic>)
+      .map(
+        (stat) => Stat(
+          name: mapStat(stat['stat']['name']),
+          value: stat['base_stat'],
+        ),
+      )
+      .toList(growable: false);
+
+  return DetailedPokemon.fromPokemon(
+    pokemon: pokemon,
+    weight: pokemonDetails['weight'],
+    stats: stats,
+    baseExperience: pokemonDetails['base_experience'],
+    height: pokemonDetails['height'],
+    abilities: abilities,
+    about: (pokemonDetails['specy']['flavor'][0]['flavor_text'] as String)
+        .replaceAll('\n', ' ')
+        .replaceAll('\f', ' '),
+  );
 }
 
 extension StringExtension on String {
