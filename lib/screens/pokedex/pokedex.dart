@@ -7,7 +7,7 @@ import 'bloc/pokedex_bloc.dart';
 class Pokedex extends StatelessWidget {
   static const screenName = '/';
 
-  const Pokedex();
+  const Pokedex({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class Pokedex extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Text(
+        title: const Text(
           "Pokedex",
           style: TextStyle(
             color: Colors.black87,
@@ -61,7 +61,7 @@ class Pokedex extends StatelessWidget {
                         sliver: SliverGrid(
                           key: const Key("SliverGrid"),
                           gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
+                              const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,
                             crossAxisSpacing: 4,
                             mainAxisSpacing: 4,

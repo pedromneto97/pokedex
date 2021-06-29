@@ -20,7 +20,7 @@ class PokemonStat extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Container(
+        SizedBox(
           width: 32,
           child: Text(
             stat.name,

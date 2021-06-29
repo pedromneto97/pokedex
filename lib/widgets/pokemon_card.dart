@@ -31,7 +31,7 @@ class PokemonCard extends StatelessWidget {
             ),
           );
         },
-        child: Container(
+        child: SizedBox(
           height: 112,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -41,7 +41,7 @@ class PokemonCard extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: Text(
-                    '${pokemon.idHash}',
+                    pokemon.idHash,
                     style: TextStyle(
                       fontSize: 8,
                       height: 1.5,

@@ -17,12 +17,12 @@ class LabeledText extends StatelessWidget {
       children: [
         Expanded(
           flex: 1,
-          child: Text(this.label),
+          child: Text(label),
         ),
         Expanded(
           flex: 3,
           child: Text(
-            this.text,
+            text,
             textAlign: TextAlign.left,
           ),
         ),

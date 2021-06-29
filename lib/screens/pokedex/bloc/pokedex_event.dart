@@ -10,7 +10,8 @@ class PokedexEventGet extends PokedexEvent {
 }
 
 class PokedexEventGetNextPage extends PokedexEvent {
-  final page;
+  final int page;
+
   const PokedexEventGetNextPage({
     required this.page,
   });

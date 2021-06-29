@@ -11,7 +11,10 @@ import 'widgets/pokemon_stat.dart';
 class PokemonScreen extends StatelessWidget {
   final Pokemon pokemon;
 
-  const PokemonScreen({required this.pokemon});
+  const PokemonScreen({
+    Key? key,
+    required this.pokemon,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -107,24 +110,24 @@ class PokemonScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     height: 48,
                     child: Row(
                       children: [
                         Column(
                           children: [
                             Row(
-                              children: [
-                                const Icon(
+                              children: const [
+                                Icon(
                                   PokemonIcons.weight,
                                   size: 16,
                                   color: darkGray,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 8.0),
+                                  padding: EdgeInsets.only(left: 8.0),
                                   child: Text(
                                     '${69 / 100} kg',
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       height: 1.6,
                                       fontSize: 10,
                                       color: darkGray,
@@ -173,7 +176,7 @@ class PokemonScreen extends StatelessWidget {
                     ),
                   ),
                   Column(
-                    children: [Stat(name: 'ATK', value: 50)]
+                    children: [const Stat(name: 'ATK', value: 50)]
                         .map(
                           (e) => PokemonStat(
                             stat: e,
