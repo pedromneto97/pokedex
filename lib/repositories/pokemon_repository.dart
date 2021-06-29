@@ -87,6 +87,13 @@ class PokemonRepository {
                     flavor_text
                   }
                 }
+                base_experience
+                stats: pokemon_v2_pokemonstats {
+                  base_stat
+                  stat: pokemon_v2_stat {
+                    name
+                  }
+                }
               }
           }
       '''),
