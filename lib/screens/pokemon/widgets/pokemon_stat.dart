@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/design_system/colors.dart';
 
+import '../../../design_system/colors.dart';
 import '../../../models/pokemon_stat.dart';
 
 class PokemonStat extends StatelessWidget {
