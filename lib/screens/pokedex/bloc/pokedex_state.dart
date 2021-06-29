@@ -1,12 +1,15 @@
 part of './pokedex_bloc.dart';
 
 @immutable
-abstract class PokedexState {
+abstract class PokedexState extends Equatable {
   const PokedexState();
 }
 
 class InitialPokedexState extends PokedexState {
   const InitialPokedexState();
+
+  @override
+  List<Object?> get props => const [];
 }
 
 class PokedexStateSuccess extends PokedexState {
@@ -35,4 +38,7 @@ class PokedexStateSuccess extends PokedexState {
         totalPages: totalPages ?? this.totalPages,
         isLoadingMore: isLoadingMore ?? this.isLoadingMore,
       );
+
+  @override
+  List<Object?> get props => [pokemons, page, totalPages, isLoadingMore];
 }
