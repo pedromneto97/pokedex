@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 import 'pokemon_stat.dart';
 
 @immutable
-class Pokemon {
+class Pokemon extends Equatable {
   final int id;
   final String name;
   final String image;
@@ -17,6 +18,9 @@ class Pokemon {
   });
 
   String get idHash => '#${id.toString().padLeft(3, '0')}';
+
+  @override
+  List<Object?> get props => [id, name, image, types];
 }
 
 @immutable
@@ -42,4 +46,15 @@ class DetailedPokemon extends Pokemon {
           image: pokemon.image,
           types: pokemon.types,
         );
+
+  @override
+  List<Object?> get props => [
+        ...super.props,
+        weight,
+        stats,
+        baseExperience,
+        height,
+        about,
+        about,
+      ];
 }
