@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../models/pokemon.dart';
+import '../repositories/pokemon_repository.dart';
+import '../screens/pokemon/bloc/pokemon_bloc.dart';
 import '../screens/pokemon/pokemon.dart';
 import '../utils/pokemon.dart';
 
@@ -23,10 +26,18 @@ class PokemonCard extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       child: InkWell(
         onTap: () {
+          final PokemonBloc pokemonBloc = PokemonBloc(
+            pokemonRepository:
+                RepositoryProvider.of<PokemonRepository>(context),
+          );
+          pokemonBloc.add(
+            GetDetailedPokemonFromPokemonEvent(pokemon: pokemon),
+          );
+
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => PokemonScreen(
-                pokemon: pokemon,
+                pokemonBloc: pokemonBloc,
               ),
             ),
           );
