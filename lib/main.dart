@@ -5,6 +5,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 
 import 'bloc_observer.dart';
 import 'design_system/design_system.dart';
+import 'repositories/pokemon_repository.dart';
 import 'screens/screens.dart';
 
 Future<void> main() async {
@@ -19,13 +20,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Pokedex',
-      initialRoute: Pokedex.screenName,
-      theme: theme,
-      routes: {
-        Pokedex.screenName: (context) => const Pokedex(),
-      },
+    return RepositoryProvider(
+      create: (context) => PokemonRepository(),
+      child: MaterialApp(
+        title: 'Pokedex',
+        initialRoute: Pokedex.screenName,
+        theme: theme,
+        routes: {
+          Pokedex.screenName: (context) => const Pokedex(),
+        },
+      ),
     );
   }
 }
