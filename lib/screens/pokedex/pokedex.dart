@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../repositories/pokemon_repository.dart';
 import '../../widgets/pokemon_card.dart';
 import 'bloc/pokedex_bloc.dart';
 
@@ -27,7 +28,9 @@ class Pokedex extends StatelessWidget {
       ),
       backgroundColor: Colors.white,
       body: BlocProvider(
-        create: (context) => PokedexBloc(),
+        create: (context) => PokedexBloc(
+          pokemonRepository: RepositoryProvider.of<PokemonRepository>(context),
+        ),
         lazy: false,
         child: Builder(builder: (context) {
           return NotificationListener<ScrollNotification>(

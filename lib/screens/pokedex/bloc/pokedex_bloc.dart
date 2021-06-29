@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
@@ -12,14 +13,16 @@ part 'pokedex_event.dart';
 part 'pokedex_state.dart';
 
 class PokedexBloc extends Bloc<PokedexEvent, PokedexState> {
-  PokedexBloc() : super(const InitialPokedexState());
+  PokedexBloc({
+    required this.pokemonRepository,
+  }) : super(const InitialPokedexState());
 
-  final PokemonRepository _pokemonRepository = PokemonRepository();
+  final PokemonRepository pokemonRepository;
 
   @override
   Stream<PokedexState> mapEventToState(PokedexEvent event) async* {
     if (event is PokedexEventGet) {
-      final data = await _pokemonRepository.getPokemons(
+      final data = await pokemonRepository.getPokemons(
         page: 1,
         withCount: true,
       );
@@ -28,13 +31,13 @@ class PokedexBloc extends Bloc<PokedexEvent, PokedexState> {
 
       yield PokedexStateSuccess(
         pokemons: result['pokemons'],
-        totalPages: (result['count'] / _pokemonRepository.pageSize).ceil(),
+        totalPages: (result['count'] / pokemonRepository.pageSize).ceil(),
       );
     }
     if (event is PokedexEventGetNextPage) {
       yield (state as PokedexStateSuccess).mergeWith(isLoadingMore: true);
 
-      final data = await _pokemonRepository.getPokemons(page: event.page);
+      final data = await pokemonRepository.getPokemons(page: event.page);
 
       final result = await compute(mapPokemon, data);
 
