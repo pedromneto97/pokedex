@@ -7,3 +7,4 @@ linter:
   rules:
     use_named_constants: true
     prefer_relative_imports: true
+    prefer_single_quotes: true
