@@ -38,24 +38,35 @@ class PokemonScreen extends StatelessWidget {
                     Navigator.of(context).pop();
                   },
                 ),
-                title: Text(
-                  state.pokemon.name,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    height: 1.333333333,
-                    fontWeight: FontWeight.bold,
+                title: Hero(
+                  tag: Key(state.pokemon.name),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: Text(
+                      state.pokemon.name,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        height: 1.333333333,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
                 actions: [
                   Padding(
                     padding: const EdgeInsets.only(right: 24.0),
                     child: Center(
-                      child: Text(
-                        state.pokemon.idHash,
-                        style: const TextStyle(
-                          fontSize: 12,
-                          height: 2.666666667,
-                          fontWeight: FontWeight.bold,
+                      child: Hero(
+                        tag: Key('${state.pokemon.idHash}-id'),
+                        child: Text(
+                          state.pokemon.idHash,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            height: 2.666666667,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),

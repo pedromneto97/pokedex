@@ -51,12 +51,15 @@ class PokemonCard extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 4.0, right: 8.0),
                 child: Align(
                   alignment: Alignment.centerRight,
-                  child: Text(
-                    pokemon.idHash,
-                    style: TextStyle(
-                      fontSize: 8,
-                      height: 1.5,
-                      color: color,
+                  child: Hero(
+                    tag: Key('${pokemon.name}-id'),
+                    child: Text(
+                      pokemon.idHash,
+                      style: TextStyle(
+                        fontSize: 8,
+                        height: 1.5,
+                        color: color,
+                      ),
                     ),
                   ),
                 ),
@@ -77,13 +80,19 @@ class PokemonCard extends StatelessWidget {
                   vertical: 4,
                   horizontal: 8,
                 ),
-                child: Text(
-                  pokemon.name,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 10,
-                    height: 1.6,
-                    color: Colors.white,
+                child: Hero(
+                  tag: Key(pokemon.name),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: Text(
+                      pokemon.name,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 10,
+                        height: 1.6,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
               ),
