@@ -18,6 +18,7 @@ class PokemonType extends StatelessWidget {
         color: color,
         borderRadius: BorderRadius.circular(10),
       ),
+      clipBehavior: Clip.antiAlias,
       padding: const EdgeInsets.symmetric(
         vertical: 2,
         horizontal: 8,
