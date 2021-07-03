@@ -67,173 +67,172 @@ class PokemonScreen extends StatelessWidget {
                   )
                 ],
               ),
-              body: Container(
-                color: color,
-                child: Stack(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.white,
-                      ),
-                      margin: const EdgeInsets.only(
-                        top: 224,
-                        left: 4,
-                        right: 4,
-                        bottom: 4,
-                      ),
-                      padding: const EdgeInsets.only(
-                        top: 56,
-                        left: 16,
-                        right: 16,
-                        bottom: 24,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: state.pokemon.types
-                                .asMap()
-                                .entries
-                                .map<Widget>((e) {
-                              if (e.key == 0) {
-                                return PokemonType(
-                                  key: ObjectKey(e),
-                                  pokemonType: e.value,
-                                );
-                              }
-                              return Padding(
-                                key: ObjectKey(e),
-                                padding: const EdgeInsets.only(left: 16.0),
-                                child: PokemonType(
-                                  pokemonType: e.value,
-                                ),
+              backgroundColor: color,
+              body: Stack(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.white,
+                    ),
+                    clipBehavior: Clip.antiAlias,
+                    margin: const EdgeInsets.only(
+                      top: 224,
+                      left: 4,
+                      right: 4,
+                      bottom: 4,
+                    ),
+                    padding: const EdgeInsets.only(
+                      top: 56,
+                      left: 16,
+                      right: 16,
+                      bottom: 24,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: state.pokemon.types
+                              .asMap()
+                              .entries
+                              .map<Widget>((type) {
+                            if (type.key == 0) {
+                              return PokemonType(
+                                key: ObjectKey(type),
+                                pokemonType: type.value,
                               );
-                            }).toList(),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8),
-                            child: Text(
-                              'About',
-                              style: TextStyle(
-                                fontSize: 14,
-                                height: 1.142857143,
-                                fontWeight: FontWeight.bold,
-                                color: color,
+                            }
+                            return Padding(
+                              key: ObjectKey(type),
+                              padding: const EdgeInsets.only(left: 16.0),
+                              child: PokemonType(
+                                pokemonType: type.value,
                               ),
-                              textAlign: TextAlign.center,
+                            );
+                          }).toList(growable: false),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: Text(
+                            'About',
+                            style: TextStyle(
+                              fontSize: 14,
+                              height: 1.142857143,
+                              fontWeight: FontWeight.bold,
+                              color: color,
                             ),
+                            textAlign: TextAlign.center,
                           ),
-                          Container(
-                            height: 48,
-                            margin: const EdgeInsets.only(bottom: 16),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                PokemonInfo.withIcon(
-                                  value: '${state.pokemon.weight / 10} kg',
-                                  icon: PokemonIcons.weight,
-                                  label: 'Weight',
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 16),
-                                  child: VerticalDivider(
-                                    width: 1,
-                                    thickness: 1,
-                                  ),
-                                ),
-                                PokemonInfo.withIcon(
-                                  value: '${state.pokemon.height / 10} m',
-                                  icon: PokemonIcons.rule,
-                                  label: 'Height',
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 16),
-                                  child: VerticalDivider(
-                                    width: 1,
-                                    thickness: 1,
-                                  ),
-                                ),
-                                PokemonInfo(
-                                  widget: Text(
-                                    state.pokemon.abilities.join('\n'),
-                                    style: const TextStyle(
-                                      fontSize: 10,
-                                      height: 1.6,
-                                      color: darkGray,
-                                    ),
-                                    textAlign: TextAlign.justify,
-                                  ),
-                                  label: 'Moves',
-                                ),
-                              ],
-                            ),
-                          ),
-                          Text(
-                            state.pokemon.about,
-                            style: const TextStyle(
-                              fontSize: 10,
-                              height: 1.6,
-                              color: darkGray,
-                            ),
-                            textAlign: TextAlign.justify,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8),
-                            child: Text(
-                              'Base Stats',
-                              style: TextStyle(
-                                fontSize: 14,
-                                height: 1.142857143,
-                                fontWeight: FontWeight.bold,
-                                color: color,
+                        ),
+                        Container(
+                          height: 48,
+                          margin: const EdgeInsets.only(bottom: 16),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              PokemonInfo.withIcon(
+                                value: '${state.pokemon.weight / 10} kg',
+                                icon: PokemonIcons.weight,
+                                label: 'Weight',
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          Column(
-                            children: state.pokemon.stats
-                                .map(
-                                  (e) => PokemonStat(
-                                    stat: e,
-                                    color: color,
-                                    backgroundColor: color.withOpacity(0.2),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 16),
+                                child: VerticalDivider(
+                                  width: 1,
+                                  thickness: 1,
+                                ),
+                              ),
+                              PokemonInfo.withIcon(
+                                value: '${state.pokemon.height / 10} m',
+                                icon: PokemonIcons.rule,
+                                label: 'Height',
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 16),
+                                child: VerticalDivider(
+                                  width: 1,
+                                  thickness: 1,
+                                ),
+                              ),
+                              PokemonInfo(
+                                widget: Text(
+                                  state.pokemon.abilities.join('\n'),
+                                  style: const TextStyle(
+                                    fontSize: 10,
+                                    height: 1.6,
+                                    color: darkGray,
                                   ),
-                                )
-                                .toList(),
-                          )
-                        ],
-                      ),
-                    ),
-                    Positioned(
-                      top: 8,
-                      right: 8,
-                      child: Icon(
-                        PokemonIcons.pokeball,
-                        size: 208,
-                        color: Colors.white.withOpacity(0.1),
-                      ),
-                    ),
-                    Positioned(
-                      top: 80,
-                      left: 0,
-                      right: 0,
-                      child: Center(
-                        child: Hero(
-                          tag: Key('${state.pokemon.name}-Image'),
-                          child: Image.network(
-                            state.pokemon.image,
-                            width: 200,
-                            height: 200,
+                                  textAlign: TextAlign.justify,
+                                ),
+                                label: 'Moves',
+                              ),
+                            ],
                           ),
+                        ),
+                        Text(
+                          state.pokemon.about,
+                          style: const TextStyle(
+                            fontSize: 10,
+                            height: 1.6,
+                            color: darkGray,
+                          ),
+                          textAlign: TextAlign.justify,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: Text(
+                            'Base Stats',
+                            style: TextStyle(
+                              fontSize: 14,
+                              height: 1.142857143,
+                              fontWeight: FontWeight.bold,
+                              color: color,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        Column(
+                          children: state.pokemon.stats
+                              .map(
+                                (e) => PokemonStat(
+                                  stat: e,
+                                  color: color,
+                                  backgroundColor: color.withOpacity(0.2),
+                                ),
+                              )
+                              .toList(),
+                        )
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                    top: 8,
+                    right: 8,
+                    child: Icon(
+                      PokemonIcons.pokeball,
+                      size: 208,
+                      color: Colors.white.withOpacity(0.1),
+                    ),
+                  ),
+                  Positioned(
+                    top: 80,
+                    left: 0,
+                    right: 0,
+                    child: Center(
+                      child: Hero(
+                        tag: Key('${state.pokemon.name}-Image'),
+                        child: Image.network(
+                          state.pokemon.image,
+                          width: 200,
+                          height: 200,
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             );
           }
