@@ -31,13 +31,7 @@ class PokemonScreen extends StatelessWidget {
               appBar: AppBar(
                 backgroundColor: Colors.transparent,
                 elevation: 0,
-                leading: IconButton(
-                  iconSize: 24,
-                  icon: const Icon(Icons.arrow_back_rounded),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
+                leading: const BackButton(),
                 title: Hero(
                   tag: Key(state.pokemon.name),
                   child: Material(
