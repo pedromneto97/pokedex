@@ -96,7 +96,9 @@ class Pokedex extends StatelessWidget {
                               vertical: 16,
                             ),
                             child: Center(
-                              child: CircularProgressIndicator(),
+                              child: CircularProgressIndicator(
+                                color: darkGray,
+                              ),
                             ),
                           ),
                         ),
