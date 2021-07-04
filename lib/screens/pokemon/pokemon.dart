@@ -147,7 +147,7 @@ class PokemonScreen extends StatelessWidget {
                               ),
                               PokemonInfo.withIcon(
                                 value: '${state.pokemon.height / 10} m',
-                                icon: PokemonIcons.rule,
+                                icon: PokemonIcons.height,
                                 label: 'Height',
                               ),
                               const Padding(
