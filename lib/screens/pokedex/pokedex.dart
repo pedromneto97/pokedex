@@ -54,6 +54,13 @@ class Pokedex extends StatelessWidget {
                     const PokedexEventGet(),
                   );
                 }
+                if (state is LoadingPokedexState) {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: darkGray,
+                    ),
+                  );
+                }
                 if (state is PokedexStateSuccess) {
                   return CustomScrollView(
                     key: const Key('CustomScrollView'),
