@@ -6,7 +6,7 @@ class PokemonRepository {
   PokemonRepository._();
 
   static PokemonRepository? _instance;
-  final int pageSize = 20;
+  final int pageSize = 30;
 
   factory PokemonRepository() {
     _instance ??= PokemonRepository._();
