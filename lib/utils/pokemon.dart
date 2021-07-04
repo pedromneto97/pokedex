@@ -91,7 +91,7 @@ Color getColorFromType(String type) {
     'rock': Color(0xFFB69E31),
     'ghost': Color(0xFF70559B),
     'steel': Color(0xFFB7B9D0),
-    'water': Color(0xFF74CB48),
+    'water': Color(0xFF6493EB),
     'grass': Color(0xFF74CB48),
     'psychic': Color(0xFFFB5584),
     'ice': Color(0xFF9AD6DF),
