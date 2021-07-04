@@ -23,6 +23,10 @@ class PokedexBloc extends Bloc<PokedexEvent, PokedexState> {
   @override
   Stream<PokedexState> mapEventToState(PokedexEvent event) async* {
     if (event is PokedexEventGet) {
+      yield LoadingPokedexState(
+        pokedexSort: event.sort ?? state.pokedexSort,
+      );
+
       final data = await pokemonRepository.getPokemons(
         page: 1,
         withCount: true,
