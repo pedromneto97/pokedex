@@ -53,13 +53,16 @@ class PokemonScreen extends StatelessWidget {
                     child: Center(
                       child: Hero(
                         tag: Key('${state.pokemon.name}-id'),
-                        child: Text(
-                          state.pokemon.idHash,
-                          style: const TextStyle(
-                            fontSize: 12,
-                            height: 2.666666667,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                        child: Material(
+                          color: Colors.transparent,
+                          child: Text(
+                            state.pokemon.idHash,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              height: 2.666666667,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
