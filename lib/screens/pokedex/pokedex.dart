@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../design_system/colors.dart';
 import '../../repositories/pokemon_repository.dart';
 import '../../widgets/pokemon_card.dart';
 import 'bloc/pokedex_bloc.dart';
+import 'widgets/pokedex_app_bar.dart';
 
 class Pokedex extends StatelessWidget {
   static const screenName = '/';
@@ -12,32 +14,20 @@ class Pokedex extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: const Text(
-          'Pokedex',
-          style: TextStyle(
-            color: Colors.black87,
-            fontWeight: FontWeight.w900,
-            fontSize: 24,
-            height: 1.25,
-          ),
-        ),
+    return BlocProvider(
+      create: (context) => PokedexBloc(
+        pokemonRepository: RepositoryProvider.of<PokemonRepository>(context),
       ),
-      backgroundColor: Colors.white,
-      body: BlocProvider(
-        create: (context) => PokedexBloc(
-          pokemonRepository: RepositoryProvider.of<PokemonRepository>(context),
-        ),
-        lazy: false,
-        child: Builder(builder: (context) {
+      lazy: false,
+      child: Scaffold(
+        appBar: const PokedexAppBar(),
+        backgroundColor: background,
+        body: Builder(builder: (context) {
           return NotificationListener<ScrollNotification>(
             onNotification: (notification) {
               final PokedexState state =
                   BlocProvider.of<PokedexBloc>(context).state;
-              if (notification.metrics.extentAfter < 20 &&
+              if (notification.metrics.extentAfter < 40 &&
                   state is PokedexStateSuccess &&
                   !state.isLoadingMore &&
                   state.page < state.totalPages) {
@@ -84,7 +74,6 @@ class Pokedex extends StatelessWidget {
                                 pokemon: state.pokemons[index],
                               );
                             },
-                            addAutomaticKeepAlives: true,
                             childCount: state.pokemons.length,
                           ),
                         ),
