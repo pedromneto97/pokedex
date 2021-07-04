@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../assets/pokemon_icons.dart';
 import '../models/pokemon.dart';
 import '../repositories/pokemon_repository.dart';
 import '../screens/pokemon/bloc/pokemon_bloc.dart';
@@ -71,6 +72,12 @@ class PokemonCard extends StatelessWidget {
                     pokemon.image,
                     height: 72,
                     width: 72,
+                    cacheHeight: 144,
+                    cacheWidth: 144,
+                    errorBuilder: (context, _, __) => const Icon(
+                      PokemonIcons.pokemon,
+                      size: 72,
+                    ),
                   ),
                 ),
               ),
