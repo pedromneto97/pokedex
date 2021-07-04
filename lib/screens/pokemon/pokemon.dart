@@ -228,6 +228,8 @@ class PokemonScreen extends StatelessWidget {
                           state.pokemon.image,
                           width: 200,
                           height: 200,
+                          cacheWidth: 200,
+                          cacheHeight: 200,
                         ),
                       ),
                     ),
