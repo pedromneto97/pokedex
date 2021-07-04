@@ -26,7 +26,7 @@ class PokemonRepository {
 
     if (withCount) {
       countQuery = '''
-         pokemons_data: pokemon_v2_pokemon_aggregate {
+         pokemons_data: pokemon_v2_pokemon_aggregate(where: {name: {_iregex: \$name}}) {
             info: aggregate {
               count
             }
