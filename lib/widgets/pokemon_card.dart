@@ -6,6 +6,7 @@ import '../models/pokemon.dart';
 import '../repositories/pokemon_repository.dart';
 import '../screens/pokemon/bloc/pokemon_bloc.dart';
 import '../screens/pokemon/pokemon.dart';
+import '../utils/fade_page_route.dart';
 import '../utils/pokemon.dart';
 
 class PokemonCard extends StatelessWidget {
@@ -36,8 +37,8 @@ class PokemonCard extends StatelessWidget {
           );
 
           Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => PokemonScreen(
+            FadePageRoute(
+              child: PokemonScreen(
                 pokemonBloc: pokemonBloc,
               ),
             ),
