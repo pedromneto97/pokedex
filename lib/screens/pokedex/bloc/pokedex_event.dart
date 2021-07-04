@@ -6,7 +6,13 @@ abstract class PokedexEvent {
 }
 
 class PokedexEventGet extends PokedexEvent {
-  const PokedexEventGet();
+  final PokedexSort? sort;
+  final String? name;
+
+  const PokedexEventGet({
+    this.sort,
+    this.name,
+  });
 }
 
 class PokedexEventGetNextPage extends PokedexEvent {

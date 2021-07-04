@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
 import '../../../models/pokemon.dart';
+import '../../../repositories/pokedex_sort.dart';
 import '../../../repositories/pokemon_repository.dart';
 import '../../../utils/pokemon.dart';
 
@@ -25,6 +26,8 @@ class PokedexBloc extends Bloc<PokedexEvent, PokedexState> {
       final data = await pokemonRepository.getPokemons(
         page: 1,
         withCount: true,
+        pokedexSort: event.sort ?? state.pokedexSort,
+        name: event.name,
       );
 
       final result = await compute(mapPokemon, data);
@@ -32,12 +35,18 @@ class PokedexBloc extends Bloc<PokedexEvent, PokedexState> {
       yield PokedexStateSuccess(
         pokemons: result['pokemons'],
         totalPages: (result['count'] / pokemonRepository.pageSize).ceil(),
+        pokedexSort: event.sort ?? state.pokedexSort,
+        filterName: event.name,
       );
     }
     if (event is PokedexEventGetNextPage) {
       yield (state as PokedexStateSuccess).mergeWith(isLoadingMore: true);
 
-      final data = await pokemonRepository.getPokemons(page: event.page);
+      final data = await pokemonRepository.getPokemons(
+        page: event.page,
+        pokedexSort: (state as PokedexStateSuccess).pokedexSort,
+        name: (state as PokedexStateSuccess).filterName,
+      );
 
       final result = await compute(mapPokemon, data);
 

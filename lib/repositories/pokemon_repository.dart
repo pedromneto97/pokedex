@@ -1,6 +1,7 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 import '../utils/graphql.dart';
+import 'pokedex_sort.dart';
 
 class PokemonRepository {
   PokemonRepository._();
@@ -17,6 +18,8 @@ class PokemonRepository {
 
   Future<Map<String, dynamic>> getPokemons({
     required int page,
+    required PokedexSort pokedexSort,
+    String? name,
     bool withCount = false,
   }) async {
     var countQuery = '';
@@ -31,12 +34,15 @@ class PokemonRepository {
       ''';
     }
 
+    final String field = pokedexSort.field == Field.id ? 'id' : 'name';
+    final String orderBy = pokedexSort.sort == Sort.asc ? 'asc' : 'desc';
+
     final data = await client
         .query(
       QueryOptions(
         document: gql('''
-            query QueryPokemons(\$page: Int!, \$pageSize: Int!) {
-              pokemons: pokemon_v2_pokemon(limit: \$pageSize, offset: \$page) {
+            query QueryPokemons(\$page: Int!, \$pageSize: Int!, \$name: String!) {
+              pokemons: pokemon_v2_pokemon(limit: \$pageSize, offset: \$page, where: {name: {_iregex: \$name}}, order_by: {$field: $orderBy}) {
                 id
                 name
                 types: pokemon_v2_pokemontypes {
@@ -51,6 +57,7 @@ class PokemonRepository {
         variables: {
           'page': (page - 1) * pageSize,
           'pageSize': pageSize,
+          'name': name ?? '',
         },
       ),
     )
