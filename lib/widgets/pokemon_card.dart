@@ -54,12 +54,15 @@ class PokemonCard extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: Hero(
                     tag: Key('${pokemon.name}-id'),
-                    child: Text(
-                      pokemon.idHash,
-                      style: TextStyle(
-                        fontSize: 8,
-                        height: 1.5,
-                        color: color,
+                    child: Material(
+                      color: Colors.transparent,
+                      child: Text(
+                        pokemon.idHash,
+                        style: TextStyle(
+                          fontSize: 8,
+                          height: 1.5,
+                          color: color,
+                        ),
                       ),
                     ),
                   ),
