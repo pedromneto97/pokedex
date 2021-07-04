@@ -88,7 +88,7 @@ class PokemonCard extends StatelessWidget {
                 color: color,
                 padding: const EdgeInsets.symmetric(
                   vertical: 4,
-                  horizontal: 8,
+                  horizontal: 2,
                 ),
                 child: Hero(
                   tag: Key(pokemon.name),
